@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import org.example.model.Curso;
+import org.example.model.InscricaoAlunoCurso;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +20,5 @@ public class AlunoDTO {
     private String fluenciaInglesPortugues;
     private String endereco;
     private LocalDate dataNascimento;
-    private LocalDate dataInscricao;
-    @ManyToMany
-    private List<Curso> cursosInscrito;
+    private List<InscricaoAlunoCurso> cursosInscrito;
 }
