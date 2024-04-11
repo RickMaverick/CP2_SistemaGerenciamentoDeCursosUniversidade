@@ -1,13 +1,18 @@
 package org.example.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.example.controller.dto.CursoDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "cursos")
 public class Curso {
     @Id
@@ -22,4 +27,11 @@ public class Curso {
             inverseJoinColumns = @JoinColumn(name = "professor_fk"))
     private List<Professor> professoresDocentes;
 
+    //Construtor DTO
+    public Curso(CursoDTO cursoDTO){
+        this.nome = cursoDTO.getNome();
+        this.descricao = cursoDTO.getDescricao();
+        this.dataInicio = cursoDTO.getDataInicio();
+        this.professoresDocentes = cursoDTO.getProfessoresDocentes();
+    }
 }

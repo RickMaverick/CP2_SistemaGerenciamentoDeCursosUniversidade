@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.controller.dto.AlunoDTO;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Aluno {
     private LocalDate dataNascimento;
     private LocalDate dataInscricao;
     @ManyToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private List<Curso> cursosInscrito;
 
     //Construtor DTO
@@ -41,4 +43,18 @@ public class Aluno {
         this.dataInscricao = alunoDTO.getDataInscricao();
         this.cursosInscrito = alunoDTO.getCursosInscrito();
     }
+
+    // Construtor com a lista de cursos inscritos
+    public Aluno(AlunoDTO alunoDTO, List<Curso> cursosInscritos) {
+        this.nome = alunoDTO.getNome();
+        this.email = alunoDTO.getEmail();
+        this.cpf = alunoDTO.getCpf();
+        this.conclusaoGraduacao = alunoDTO.getConclusaoGraduacao();
+        this.fluenciaInglesPortugues = alunoDTO.getFluenciaInglesPortugues();
+        this.endereco = alunoDTO.getEndereco();
+        this.dataNascimento = alunoDTO.getDataNascimento();
+        this.dataInscricao = alunoDTO.getDataInscricao();
+        this.cursosInscrito = cursosInscritos; // Atribuindo a lista de cursos
+    }
 }
+
