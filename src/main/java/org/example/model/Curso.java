@@ -16,7 +16,7 @@ public class Curso {
     private String nome;
     private String descricao;
     private LocalDate dataInicio;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cursos_professores",
             joinColumns = @JoinColumn(name = "curso_fk"),
             inverseJoinColumns = @JoinColumn(name = "professor_fk"))
