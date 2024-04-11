@@ -21,17 +21,15 @@ public class Curso {
     private String nome;
     private String descricao;
     private LocalDate dataInicio;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cursos_professores",
-            joinColumns = @JoinColumn(name = "curso_fk"),
-            inverseJoinColumns = @JoinColumn(name = "professor_fk"))
-    private List<Professor> professoresDocentes;
+    @OneToMany
+    @JoinColumn(name = "curso_id")
+    private List<InscricaoAlunoCurso> alunosInscritos;
+
 
     //Construtor DTO
     public Curso(CursoDTO cursoDTO){
         this.nome = cursoDTO.getNome();
         this.descricao = cursoDTO.getDescricao();
         this.dataInicio = cursoDTO.getDataInicio();
-        this.professoresDocentes = cursoDTO.getProfessoresDocentes();
     }
 }

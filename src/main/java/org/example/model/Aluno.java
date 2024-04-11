@@ -26,10 +26,10 @@ public class Aluno {
     private String fluenciaInglesPortugues;
     private String endereco;
     private LocalDate dataNascimento;
-    private LocalDate dataInscricao;
-    @ManyToMany
+    @OneToMany
+    @JoinColumn(name = "aluno_id")
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Curso> cursosInscrito;
+    private List<InscricaoAlunoCurso> cursosInscrito;
 
     //Construtor DTO
     public Aluno (AlunoDTO alunoDTO){
@@ -40,12 +40,11 @@ public class Aluno {
         this.fluenciaInglesPortugues = alunoDTO.getFluenciaInglesPortugues();
         this.endereco = alunoDTO.getEndereco();
         this.dataNascimento = alunoDTO.getDataNascimento();
-        this.dataInscricao = alunoDTO.getDataInscricao();
         this.cursosInscrito = alunoDTO.getCursosInscrito();
     }
 
     // Construtor com a lista de cursos inscritos
-    public Aluno(AlunoDTO alunoDTO, List<Curso> cursosInscritos) {
+    public Aluno(AlunoDTO alunoDTO, List<InscricaoAlunoCurso> cursosInscritos) {
         this.nome = alunoDTO.getNome();
         this.email = alunoDTO.getEmail();
         this.cpf = alunoDTO.getCpf();
@@ -53,7 +52,6 @@ public class Aluno {
         this.fluenciaInglesPortugues = alunoDTO.getFluenciaInglesPortugues();
         this.endereco = alunoDTO.getEndereco();
         this.dataNascimento = alunoDTO.getDataNascimento();
-        this.dataInscricao = alunoDTO.getDataInscricao();
         this.cursosInscrito = cursosInscritos; // Atribuindo a lista de cursos
     }
 }
